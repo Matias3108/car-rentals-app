@@ -9,7 +9,7 @@ export default function Principal() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        axios.get("http://localhost:4000/api/vehiculos")
+        axios.get(`${import.meta.env.VITE_API_URL}/api/vehiculos`)
             .then((res) => {
                 setVehiculos(res.data);
                 setLoading(false);
@@ -21,7 +21,7 @@ export default function Principal() {
     }, []);
 
     const buscarAutos = () => {
-        axios.get(`http://localhost:4000/api/vehiculos?transmision=${transmision}&tipo=${tipo}`)
+        axios.get(`${import.meta.env.VITE_API_URL}/api/vehiculos?transmision=${transmision}&tipo=${tipo}`)
             .then(res => setVehiculos(res.data))
             .catch(err => console.error(err));
     };

@@ -28,10 +28,10 @@ export default function ReservaPage() {
         if (!vehiculoId) return;
 
         Promise.all([
-            axios.get(`http://localhost:4000/api/vehiculos/${vehiculoId}`),
-            axios.get(`http://localhost:4000/api/seguros`),
-            axios.get(`http://localhost:4000/api/equipamientos`),
-            axios.get(`http://localhost:4000/api/ubicaciones`)
+            axios.get(`${import.meta.env.VITE_API_URL}/api/vehiculos/${vehiculoId}`),
+            axios.get(`${import.meta.env.VITE_API_URL}/api/seguros`),
+            axios.get(`${import.meta.env.VITE_API_URL}/api/equipamientos`),
+            axios.get(`${import.meta.env.VITE_API_URL}/api/ubicaciones`)
         ])
             .then(([vehiculoRes, segurosRes, equipamientosRes, ubicacionesRes]) => {
                 setVehiculo(vehiculoRes.data);

@@ -50,9 +50,9 @@ export default function Confirmacion() {
             try {
                 // Traer auto, seguro y ubicación en paralelo
                 const [vehiculoRes, seguroRes, ubicacionRes] = await Promise.all([
-                    axios.get(`http://localhost:4000/api/vehiculos/${vehiculoId}`),
-                    axios.get(`http://localhost:4000/api/seguros/${seguroId}`),
-                    axios.get(`http://localhost:4000/api/ubicaciones/${ubicacionId}`),
+                    axios.get(`${import.meta.env.VITE_API_URL}/api/vehiculos/${vehiculoId}`),
+                    axios.get(`${import.meta.env.VITE_API_URL}/api/seguros/${seguroId}`),
+                    axios.get(`${import.meta.env.VITE_API_URL}/api/ubicaciones/${ubicacionId}`),
                 ]);
 
                 setVehiculo(vehiculoRes.data);
@@ -62,7 +62,7 @@ export default function Confirmacion() {
                 // Para los equipamientos (varios IDs → varias requests)
                 if (equipamientosIds.length > 0) {
                     const equipamientoRequests = equipamientosIds.map((id) =>
-                        axios.get(`http://localhost:4000/api/equipamientos/${id}`)
+                        axios.get(`${import.meta.env.VITE_API_URL}/api/equipamientos/${id}`)
                     );
 
                     const equipamientosRes = await Promise.all(equipamientoRequests);
@@ -97,7 +97,7 @@ export default function Confirmacion() {
                 formaPago: formData.formaPago,
             };
 
-            const res = await axios.post("http://localhost:4000/api/reservas", reservaData);
+            const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/reservas`, reservaData);
 
             alert("✅ Reserva confirmada");
             navigate('/'); // Redirige a la página principal
